@@ -8,19 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var moviesData: MoviesData
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        TabView {
+            ListView(searchMovies: moviesData.movies)
+                .tabItem {
+                    Image(systemName: "film.circle.fill")
+                    Text("Films")
+                }
+            Profile(user: user)
+                .tabItem {
+                    Image(systemName: "person.circle.fill")
+                    Text("Profil")
+                }
         }
-        .padding()
+      
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(MoviesData())
     }
 }
